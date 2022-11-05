@@ -1,10 +1,14 @@
-text = "This is to demonstrate file compression using Huffman coding"
+import heapq
+from node import Node
+letter_freq = {}
 
-def frequency_list():
-    letter_freq = {}
-    for c in range(0, len(text)):
-        if letter_freq.__contains__(text[c]):
-            letter_freq.update({text[c]: letter_freq.get(text[c]) + 1})
+
+def generate_frequency_dictionary(text):
+    for c in range(0, len(text)-1):
+        if letter_freq.get(text[c]) is None:
+            newnode = Node(text[c], 1)
+            letter_freq.update({text[c]: newnode})
         else:
-            letter_freq.update({text[c]: 0})
-    print(letter_freq)
+            node = letter_freq.get(text[c])
+            node.increment_count()
+    return letter_freq

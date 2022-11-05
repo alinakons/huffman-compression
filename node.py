@@ -1,0 +1,54 @@
+import heapq
+class Node:
+    def __init__(self, data, frequency):
+        self.left = None
+        self.right = None
+        self.data = data
+        self.frequency = frequency
+
+    def increment_count(self):
+        self.frequency = self.get_frequency() + 1
+
+    def get_data(self):
+        return self.data
+
+    def get_frequency(self):
+        return self.frequency
+
+    def __lt__(self, nxt):
+        return self.frequency < nxt.frequency
+
+    def has_left(self):
+        if self.left is None:
+            return False
+        else:
+            return True
+
+    def has_right(self):
+        if self.right is None:
+            return False
+        else:
+            return True
+
+    def generate_huffmantree(self, li):
+        while len(li) > 1:
+            node1 = heapq.heappop(li)
+            node2 = heapq.heappop(li)
+            root = Node(None, node1.get_frequency() + node2.get_frequency())
+            if node1.get_frequency() < node2.get_frequency():
+                root.left = node1
+                root.right = node2
+            else:
+                root.left = node2
+                root.right = node1
+            heapq.heappush(li, root)
+        return root
+
+
+    @staticmethod
+    def print_nodes(root):
+        if root.left is not None:
+            print_nodes(root.left)
+        if root.right is not None:
+            print_nodes(root.right)
+        print({root.get_frequency()}, {root.get_data()})
