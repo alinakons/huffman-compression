@@ -5,6 +5,7 @@ class Node:
         self.right = None
         self.data = data
         self.frequency = frequency
+        self.code=''
 
     def increment_count(self):
         self.frequency = self.get_frequency() + 1
@@ -36,9 +37,13 @@ class Node:
             node2 = heapq.heappop(li)
             root = Node(None, node1.get_frequency() + node2.get_frequency())
             if node1.get_frequency() < node2.get_frequency():
+                node1.code=0
+                node2.code=1
                 root.left = node1
                 root.right = node2
             else:
+                node1.code=1
+                node2.code=0
                 root.left = node2
                 root.right = node1
             heapq.heappush(li, root)
