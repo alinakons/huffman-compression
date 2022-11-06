@@ -2,8 +2,24 @@ import heapq
 import frequency_list
 from node import Node
 from huffmanTree import HuffmanTree
+import  tkinter
+# open dialog box for choosing file
+from tkinter.filedialog import askopenfilename
+filetypes = (
+    ('Text files', '*.TXT'),
+    ('All files', '*.*'),
+)
 
-text = "aaaaabbbbbbbbbccccccccccccdddddddddddddeeeeeeeeeeeeeeeeffffffffffffffffffffffffffffffffffffffffffffff"
+filename = askopenfilename(
+    filetypes=filetypes,)
+
+text_file = open(filename, "r")
+text = text_file.read()
+text_file.close()
+print(text)
+
+
+#text = "aaaaabbbbbbbbbccccccccccccdddddddddddddeeeeeeeeeeeeeeeeffffffffffffffffffffffffffffffffffffffffffffff"
 letter_freq = frequency_list.generate_frequency_dictionary(text)
 print(letter_freq)
 li = []
