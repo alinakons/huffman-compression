@@ -38,11 +38,12 @@ def print_nodes(root):
     print({root.get_frequency()}, {root.get_data()})
 
 def generate_codes(root, str1):
+    str1 = str1 + root.code
     if root.left is not None:
-        str1 = str1 + "0"
+        #str1 = str1 + "0"
         generate_codes(root.left, str1)
     if root.right is not None:
-        str1 = str1 + "1"
+        #str1 = str1 + "1"
         generate_codes(root.right, str1)
     if root.get_data() is not None:
         print({root.get_frequency()}, {root.get_data()}, str1)
