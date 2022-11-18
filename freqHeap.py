@@ -1,8 +1,10 @@
 import heapq
+
+import decodeFile
 import frequency_list
-from node import Node
-from huffmanTree import HuffmanTree
-import  tkinter
+import huffmanCode
+import encodeFile
+
 # Huffman Coding in python
 from tkinter.filedialog import askopenfilename
 filetypes = (
@@ -18,7 +20,7 @@ text = text_file.read()
 text_file.close()
 print(text)
 
-#text = "aaaaabbbbbbbbbccccccccccccdddddddddddddeeeeeeeeeeeeeeeeffffffffffffffffffffffffffffffffffffffffffffff"
+
 letter_freq = frequency_list.generate_frequency_dictionary(text)
 print(letter_freq)
 li = []
@@ -37,21 +39,14 @@ def print_nodes(root):
         print_nodes(root.right)
     print({root.get_frequency()}, {root.get_data()})
 
-def generate_codes(root, str1):
-    str1 = str1 + root.code
-    if root.left is not None:
-        #str1 = str1 + "0"
-        generate_codes(root.left, str1)
-    if root.right is not None:
-        #str1 = str1 + "1"
-        generate_codes(root.right, str1)
-    if root.get_data() is not None:
-        print({root.get_frequency()}, {root.get_data()}, str1)
-        str1 = ""
+
 
 str1 = ""
 print_nodes(root)
-generate_codes(root,str1)
+print(huffmanCode.generate_codes(root, str1))
+encoded_file = encodeFile.huffman_encode(filename, huffmanCode.generate_codes(root, str1))
+decodeFile.huffman_decode(encoded_file, huffmanCode.generate_codes(root, str1))
+
 
 
 
