@@ -9,7 +9,6 @@ def generate_codes(root, str1):
     if root.right is not None:
         generate_codes(root.right, str1)
     if root.get_data() is not None:
-        print({root.get_frequency()}, {root.get_data()}, str1)
         arr = bitarray(str1)
         huffman_code_dict.update({root.get_data(): arr})
         str1 = ""
